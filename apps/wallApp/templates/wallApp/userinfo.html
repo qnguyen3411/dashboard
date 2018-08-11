@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>User Info</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="main.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark text-white">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <div class = "main wrapper mx-auto col-10" >
+        <div class=" profileinfo row">
+            <div class="col-4">
+                <h1>Micheal Choi</h1>
+                <p>re</p>
+                <p>disao</p>
+                <p>dsad</p>
+                <p>dsd</p>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <form class="col-12" >
+                <div class="form-group">
+                        <label for="comment ">Leave a message for Micheal:</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea3" rows="3" id="comment"></textarea>
+                        <button class="btn btn-outline-success ml-auto d-flex" type="submit">Post</button>
+                </div>
+            </form>
+        </div>
+
+       
+        <div class="primary-comment " style="min-height: 100px">
+            <div class="commentinfo d-flex ">
+                <p class="d-inline mb-0">Mark Gullen wrote</p>
+                <p class="d-inline font-italic ml-auto mb-0"> 7 hours ago</p>
+            </div>
+            <div class="form-control" style="min-height: 80px">
+                <h1>heyhyeheyhye</h1>
+            </div>
+        
+            <div class=" secondary-comment col-11 ml-auto my-3">
+                <div class="commentinfo d-flex ml-auto">
+                        <p class="d-inline mb-0">Jim-Jim the Jimster wrote</p>
+                        <p class="d-inline font-italic ml-auto mb-0"> 7 hours ago</p>
+                </div>
+                <div class="form-control ml-auto" style="min-height: 80px">
+                        <p>heyhyehyheyhyefhouefpafgpuugfsduududud</p>
+                </div>
+            </div>
+            <div class=" secondary-comment col-11 ml-auto my-3">
+                <div class="commentinfo d-flex ml-auto">
+                        <p class="d-inline mb-0">Bob Bobson wrote</p>
+                        <p class="d-inline font-italic ml-auto mb-0"> 7 hours ago</p>
+                </div>
+                <div class="form-control ml-auto" style="min-height: 80px">
+                        <p>heyhyehyheyhyefhouefpafgpuugfsduududud</p>
+                </div>
+            </div>
+
+            <div class=" reply col-11 ml-auto">
+                <textarea class="form-control mb-2 col-12" id="exampleFormControlTextarea3" rows="2" id="reply" placeholder="write a message"></textarea>
+                <button class="btn btn-outline-success ml-auto d-flex" type="submit">Post</button>
+            </div>
+        </div><!--end primary comment-->
+        
+        <div class="primary-comment"style=" min-height:100px">
+            <div class="commentinfo d-flex ">
+                <p class="d-inline mb-0">John Guppen wrote</p>
+                <p class="d-inline font-italic ml-auto mb-0"> 7 hours ago</p>
+            </div>
+            <div class="form-control" style="min-height: 80px">
+                <h1>heyhyeheyhye</h1>
+            </div>
+        
+            <div class=" secondary-comment col-11 ml-auto my-3">
+                <div class="commentinfo d-flex ml-auto">
+                        <p class="d-inline mb-0">KB wrote</p>
+                        <p class="d-inline font-italic ml-auto mb-0"> 7 hours ago</p>
+                </div>
+                <div class="form-control ml-auto" style="min-height: 80px">
+                        <p>heyhyehyheyhyefhouefpafgpuugfsduududud</p>
+                </div>
+            </div>
+            
+
+            <div class=" reply col-11 ml-auto">
+                <textarea class="form-control mb-2" id="exampleFormControlTextarea3" rows="2" id="reply" placeholder="write a message"></textarea>
+                <button class="btn btn-outline-success ml-auto d-flex" type="submit">Post</button>
+            </div>
+        </div><!--end primary comment-->
+        
+    </div><!--end mainwrapper-->
+</body>
+</html>
