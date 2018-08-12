@@ -18,7 +18,7 @@
             </div>
         </nav>
         <div class="card col-9 p-0 my-2">
-            <h2 class="font_weight_light card-header bg-dark text-light">Welcome, admin {{self.first_name}} <span class="small text-muted">--id:(({{self.id}}))</span> </h2>
+            <h2 class="font-weight-normal card-header bg-dark text-light">Welcome, admin {{self.first_name}} <span class="small text-muted">--id:(({{self.id}}))</span> </h2>
             <div class="card-body p-0">
                 <table class="table table-striped ">
                     <thead class="bg-dark text-white">
@@ -28,16 +28,21 @@
                             <th>Email</th>
                             <th>created-at</th>
                             <th>user-level</th>
+                            <th>actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for user in users %}
                         <tr class="">
                             <td>{{user.id}}</td>
-                            <td><a href="/users/{{user.id}}">{{{user.first_name}} {{user.last_name}}</a></td>
+                            <td><a href="/users/{{user.id}}">{{user.first_name}} {{user.last_name}}</a></td>
                             <td>{{user.email}}</td>
                             <td>{{user.created_at}}</td>
                             <td>{{user.user_level}}</td>
+                            <td>
+                                <a href="/admin/{{user.id}}/edit">Edit</a>
+                                <a href="/admin/{{user.id}}/remove">Remove</a>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
