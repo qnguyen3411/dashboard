@@ -10,12 +10,12 @@
 </head>
 <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark text-white">
-                <a class="navbar-brand" href="/">Dashboard</a>
-                
-                <form action="/logout_process" class=" ml-auto">
-                    <input type="submit" value="Logout" class="form-control btn-large btn-dark border-white ">
-                </form>
-                </div>
+            <a class="navbar-brand" href="/">Dashboard</a>
+            
+            <form action="/logout_process" class=" ml-auto">
+                <input type="submit" value="Logout" class="form-control btn-large btn-dark border-white ">
+            </form>
+            </div>
         </nav>
         <div class="card col-9 p-0 my-2">
             <h2 class="font_weight_light card-header bg-dark text-light">Welcome, admin {{self.first_name}} <span class="small text-muted">--id:(({{self.id}}))</span> </h2>
@@ -34,7 +34,7 @@
                         {% for user in users %}
                         <tr class="">
                             <td>{{user.id}}</td>
-                            <td>{{user.first_name}} {{user.last_name}}</td>
+                            <td><a href="/users/{{user.id}}">{{{user.first_name}} {{user.last_name}}</a></td>
                             <td>{{user.email}}</td>
                             <td>{{user.created_at}}</td>
                             <td>{{user.user_level}}</td>

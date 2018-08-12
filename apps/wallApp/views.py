@@ -58,7 +58,18 @@ def admin_page(request):
     
     return redirect('/')
 
-
+def profile_page(request, id):
+    #IF VISITOR IS LOGGED IN
+    if 'id' in request.session:
+        #CHECK IF PAGE OWNER"S ID IS VALID
+        users = User.objects.filter(id=id)
+        if len(users):
+            data={  
+                    'owner' : users[0],
+                    'visitor' : User.objects.get(id=request.session['id'])
+            }
+            return render(request,'wallApp/profile.html', data)
+    return redirect('/')
 #///////////////////////////////////////////////
 #PROCESS
 #///////////////////////////////////////////////
@@ -104,4 +115,41 @@ def logout_process(request):
         request.session.clear()
 
     return redirect('/')
-    
+
+def message_process(request,id):
+    #IF USER GOT HERE VIA POST AND IS LOGGED IN
+    if request.method == 'POST' and 'id' in request.session:
+        #IF TARGET'S ID IS CORRECT
+        users = User.objects.filter(id=id)
+        if len(users):
+            if len(request.POST['content']) == 0:
+                messages.error(request,"Message can't be empty")
+            else:
+                sender = User.objects.get(id=request.session['id'])
+                Message.objects.create(
+                    content=request.POST['content'], 
+                    sender=sender, 
+                    receiver=users[0]
+                )
+                return redirect('/users/'+str(id)+'/')
+    return redirect('/')
+
+def comment_process(request, msg_id):
+    if request.method == 'POST' and 'id' in request.session:
+        messages = Message.objects.filter(id=msg_id)
+        if len(messages):
+            print(request.POST)
+            if len(request.POST['content']) == 0:
+                messages.error(request,"Comment can't be empty")
+            else:
+                commenter = User.objects.get(id=request.session['id'])
+                new_comment = Comment.objects.create(
+                    content=request.POST['content'], 
+                    commenter=commenter, 
+                    message=messages[0]
+                )
+                page_id = new_comment.message.receiver.id
+                
+            return redirect('/users/'+str(page_id)+'/')
+    return redirect('/')
+

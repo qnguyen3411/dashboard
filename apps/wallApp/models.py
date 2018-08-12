@@ -52,3 +52,18 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     objects = UserManager()
+
+class Message(models.Model):
+    content = models.TextField()
+    sender = models.ForeignKey(User, related_name="sent_messages")
+    receiver = models.ForeignKey(User, related_name="received_messages")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Comment(models.Model):
+    content = models.TextField()
+    commenter = models.ForeignKey(User, related_name="comments")
+    message = models.ForeignKey(Message, related_name= "comments")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
