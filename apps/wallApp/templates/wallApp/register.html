@@ -10,7 +10,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark text-white">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="/">Dashboard</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -44,20 +44,27 @@
             </form>
         </div>
     </nav>
-    <form class = "form-signin col-5">
-        <h1 class ="h3 mb-3 font-weight-normal">Signin</h1>
-        <label for="inputEmail" >Email address:</label>
-        <input type="email" id="inputEmail" class="form-control" >
-        <label for="usr_first">First Name:</label>
-        <input type="text" class="form-control" id="usr_first">
-        <label for="usr_last">Last Name:</label>
-        <input type="text" class="form-control" id="usr_last">
-        <label for="inputPassword">Password</label>
-        <input type="password" id="inputPassword" class="form-control" >
-        <label for="confirmPassword">Password Confirmation</label>
-        <input type="password" id="confirmPassword" class="form-control" >
+    <form action="register_process" method='post' class = "form-signin col-5">
+        {% csrf_token %}
+        <h1 class ="h3 mb-3 font-weight-normal">Registration</h1>
+        <label for="email" >Email address:</label>
+        <input type="email" name="email" class="form-control" >
+        <label for="first_name">First Name:</label>
+        <input type="text" class="form-control" name="first_name">
+        <label for="last_name">Last Name:</label>
+        <input type="text" class="form-control" name="last_name">
+        <label for="birthday">Birthday:</label>
+        <div class=" ml-1 row h3 font-weight-light text-secondary">
+        <input type="text" placeholder="mm" class="col-2 form-control" name="month"> /
+        <input type="text" placeholder="dd" class="col-2 ml-2 form-control" name="day"> /
+        <input type="text" placeholder="yyyy" class="col-2 ml-2 form-control" name="year">
+        </div>
+        <label for="password">Password</label>
+        <input type="password" name="password" class="form-control">
+        <label for="confirm">Password Confirmation</label>
+        <input type="password" name="confirm" class="form-control" >
         <button class="btn btn-lg btn-dark btn-block" type="submit">Register</button>
-        <a href="">Already have an account? Login.</a>
+        <a href="/login">Already have an account? Login.</a>
     </form>
 </body>
 </html>
