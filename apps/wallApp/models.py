@@ -10,8 +10,6 @@ class UserManager(models.Manager):
                         check_all=False, 
                         check_name=False,
                         check_email=False,
-                        check_email_format=False,
-                        check_email_exist=False,
                         check_password=False,
                         check_birthday=False):
         errors = {}
@@ -27,14 +25,14 @@ class UserManager(models.Manager):
             elif not postData['last_name'].isalpha():
                 errors['last_name_noalpha'] = "Last name must consist of only characters"
         #EMAIL
-        if check_email_format or check_email or check_all:
+        if check_email or check_all:
             #IF INVALID FORMAT
             if len(postData['email']) < 1 :
                 errors['email_length'] = "Email must not be empty"
             elif not EMAIL_REGEX.match(postData['email']):
                 errors['email_invalid']= "Invalid email address"
             #IF ALREADY IN DATABSE
-            elif check_email_exist or check_email or check_all:
+            else:
                 match = self.filter(email=postData['email'])
                 if len(match):
                     errors['email_match'] = "Email is already in database"

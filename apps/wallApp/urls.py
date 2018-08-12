@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^admin$', views.admin_page),
     url(r'^users/(?P<id>\d+)/$', views.profile_page),
     url(r'^users/edit/$', views.user_edit_page),
-    url(r'^admin/(?P<id>\d+)/edit$', views.admin_edit_page),
+    url(r'^admin/edit/(?P<id>\d+)$', views.admin_edit_page),
 
     #PROCESS ROUTES
     url(r'^login_process$', views.login_process),

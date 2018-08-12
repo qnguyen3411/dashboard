@@ -11,11 +11,12 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark text-white">
         <a class="navbar-brand" href="/">Dashboard</a>
-       
-        <form action="/logout_process" class=" ml-auto">
+        <form action="/users/edit" class=" ml-auto">
+            <input type="submit" value="Edit profile" class="form-control btn-large btn-dark border-white ">
+        </form>
+        <form action="/logout_process" >
             <input type="submit" value="Logout" class="form-control btn-large btn-dark border-white ">
         </form>
-        </div>
     </nav>
     <div class="card col-10 p-0 my-2">
         <h2 class="card-header font_weight_light bg-dark text-light">Welcome, {{self.first_name}} <span class="small text-muted">--id:(({{self.id}}))</span> </h2>

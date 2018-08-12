@@ -11,45 +11,55 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark text-white">
         <a class="navbar-brand" href="/">Dashboard</a>
-        <form action="/logout_process" class=" ml-auto">
+        <form action="/users/edit" class=" ml-auto">
+            <input type="submit" value="Edit profile" class="form-control btn-large btn-dark border-white ">
+        </form>
+        <form action="/logout_process" >
             <input type="submit" value="Logout" class="form-control btn-large btn-dark border-white ">
         </form>
-        </div>
     </nav>
+    <div class="row">
+        <div class="card mainwrapper col-7 my-3 px-0 bg-dark text-light" >
+            <div class ="h3 card-header mb-3 font-weight-normal border-white">Edit User #{{user.id}}</div>
+            <div class="row">
+                <div class="editInfo col-6">
+                    <form action="/edit_process/{{user.id}}" method="post" class="form-signin col-12 mx-auto py-3">
+                        {% csrf_token %}
+                        <h1 class ="h4 mb-3 font-weight-normal">Edit information</h1>
+                        <label for="inputEmail" >Email address:</label>
+                        <input type="email" name="email" class="form-control" >
+                        <label for="usr_first">First Name:</label>
+                        <input type="text" class="form-control" name="first_name">
+                        <label for="usr_last">Last Name:</label>
+                        <input type="text" class="form-control" name="last_name">
 
-    <div class="card mainwrapper col-11 my-3 px-0 bg-dark text-light" >
-        <div class ="h3 card-header mb-3 font-weight-normal border-white">Edit User #{{user.id}}</div>
-        <div class="row">
-            <div class="editInfo col-6">
-                <form action="/edit_process/{{user.id}}" method="post" class="form-signin col-12 mx-auto py-3">
-                    {% csrf_token %}
-                    <h1 class ="h4 mb-3 font-weight-normal">Edit information</h1>
-                    <label for="inputEmail" >Email address:</label>
-                    <input type="email" name="email" class="form-control" >
-                    <label for="usr_first">First Name:</label>
-                    <input type="text" class="form-control" name="first_name">
-                    <label for="usr_last">Last Name:</label>
-                    <input type="text" class="form-control" name="last_name">
+                        <button class="btn btn-outline-success ml-auto d-flex" type="submit">Save</button>
 
-                    <button class="btn btn-outline-success ml-auto d-flex" type="submit">Save</button>
+                    </form>
+                </div>
+                <div class=" changepassword col-5 d-flex ml-auto" >
+                    
+                    <form action="/edit_process/{{user.id}}" method='post' class = "form-signin col-12 mx-auto">
+                        {% csrf_token%}
+                        <h1 class ="h3 mb-3 font-weight-normal">Change Password</h1>
+                        <label for="inputPassword">Password</label>
+                        <input type="password" name="pasword" class="form-control" >
+                        <label for="confirmPassword">Password Confirmation</label>
+                        <input type="password" name="confirm" class="form-control" >
+                        <button class="btn btn-outline-success ml-auto d-flex" type="submit">Update Password</button>
+                    </form>
+                </div>
 
-                </form>
-            </div>
-            <div class=" changepassword col-5 d-flex ml-auto" >
-                
-                <form action="/edit_process/{{user.id}}" method='post' class = "form-signin col-12 mx-auto">
-                    {% csrf_token%}
-                    <h1 class ="h3 mb-3 font-weight-normal">Change Password</h1>
-                    <label for="inputPassword">Password</label>
-                    <input type="password" name="pasword" class="form-control" >
-                    <label for="confirmPassword">Password Confirmation</label>
-                    <input type="password" name="confirm" class="form-control" >
-                    <button class="btn btn-outline-success ml-auto d-flex" type="submit">Update Password</button>
-                </form>
-            </div>
-
-        </div><!--end row-->
-    </div><!--end mainwrapper-->
+            </div><!--end row-->
+        </div><!--end mainwrapper-->
+        <div class="card col-4">
+            {% if messages %}
+            {% for message in messages %}
+            <li class="text-danger">{{message}}</li>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
 
 </body>
 </html>

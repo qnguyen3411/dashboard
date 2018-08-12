@@ -64,8 +64,10 @@ def user_edit_page(request):
     if 'id' in request.session:
         users = User.objects.filter(id=request.session['id'])
         if len(users) and users[0].user_level == 1:
-                data = { 'user' : User.objects.get(id=users[0].id) }
+                data = {'user' : User.objects.get(id=users[0].id)}
                 return render(request, 'wallApp/edit.html', data)
+        else:
+            return redirect('/admin/edit/'+str(request.session['id']))
     return redirect('/')
 
 def admin_edit_page(request,id):
@@ -73,10 +75,10 @@ def admin_edit_page(request,id):
     if 'id' in request.session:
         users = User.objects.filter(id=request.session['id'])
         if len(users) and users[0].user_level == 9:
-                data={  
-                    'user' : User.objects.get(id=id)
-                }
-                return render(request, 'wallApp/editadmin.html', data)
+            data = {'user' : User.objects.get(id=id)}
+            return render(request, 'wallApp/editadmin.html', data)
+        else:
+            return redirect('/users/edit')
     return redirect('/')
 
 """PROCESS ROUTES"""
@@ -168,29 +170,33 @@ def edit_process(request,id):
         targets = User.objects.filter(id=id)
         if len(editors) and len(targets):
             # If user trying to edit own page or is admin
-            if editors[0].id == id or editors[0].user_level == 9:
+            if editors[0].id == int(id) or editors[0].user_level == 9:
                 # If user trying to edit personal info
                 if 'first_name' in request.POST and 'last_name' in request.POST and 'email' in request.POST:
                     if 'user_level' in request.POST and editors[0].user_level == 9:
                         user_level = int(request.POST['user_level'])
                     else: 
                         user_level = 1
-                    
                     errors = User.objects.info_validation(
                         request.POST, 
                         check_name=True, 
-                        check_email_format=True)
+                        check_email=True)
+                    #If matching emails, check if the input is just the target's old email
+                    if 'email_match' in errors and request.POST['email'] == targets[0].email:
+                        errors.pop('email_match')
+                    
                     if len(errors):
                         for key, value in errors.items():
                             messages.error(request, value)
-                        
                     else:
+                        print("STEP 5")
                         targets.update(
                             first_name = request.POST['first_name'],
                             last_name = request.POST['last_name'],
                             email = request.POST['email'],
                             user_level = user_level
                         )
+                        messages.success(request,"Information updated")
                 # If user trying to update password
                 elif 'password' in request.POST:
                     errors = User.objects.info_validation(request.POST, check_password=True)
@@ -201,5 +207,5 @@ def edit_process(request,id):
                         pw_hash = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
                         targets.update(password_hash=pw_hash)
 
-                return redirect('/admin/'+str(id)+'/edit')
+                return redirect('/admin/edit/'+id)
     return redirect('/')
