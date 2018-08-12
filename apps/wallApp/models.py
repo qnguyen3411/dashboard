@@ -47,6 +47,7 @@ class User(models.Model):
     email = models.CharField(max_length=255)
     password_hash = models.CharField(max_length=255)
     birthday = models.DateField()
+    user_level = models.IntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -17,16 +17,25 @@
         
         
     </nav>
-    <form action="/login_process" method='post' class = "form-signin col-5">
+    <div class="row ml-1">
+    <form action="/login_process" method='post' class = "form-signin col-5 mt-3">
         {% csrf_token %}
 
         <h1 class ="h3 mb-3 font-weight-normal">Signin</h1>
-        <label for="email" class="sr-only" >Email address</label>
+        {% if messages %}
+        {% for message in messages %}
+        <li class="text-danger">{{message}}</li>
+        {% endfor %}
+        {% endif %}
+        <label for="email" class="" >Email address:</label>
         <input type="email" name="email" class="form-control" placeholder="Email">
-        <label for="password" class="sr-only">Password</label>
+        <label for="password" class="mt-1">Password:</label>
         <input type="password" name="password" class="form-control" placeholder="Password">
-        <button class="btn btn-lg btn-dark btn-block" type="submit">Sign in</button>
+        <input class=" bg-dark text-white form-control col-3 my-2" type="submit" value="Sign In">
         <a href="/register">Don't have an account? Register.</a>
     </form>
+
+
+    </div>
 </body>
 </html>

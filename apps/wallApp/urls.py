@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^login$', views.login_page),
     url(r'^register$', views.register_page),
     url(r'^dashboard$', views.dashboard_page),
+    url(r'^admin$', views.admin_page),
 
     #PROCESSING
     url(r'^login_process$', views.login_process),

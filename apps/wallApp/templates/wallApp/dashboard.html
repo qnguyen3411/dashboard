@@ -11,67 +11,40 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark text-white">
         <a class="navbar-brand" href="/">Dashboard</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-            
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-            </ul>
-            <form action="/logout_process" class="col-2">
-                <input type="submit" value="Logout" class="form-control btn-large btn-dark border-white ">
-            </form>
+       
+        <form action="/logout_process" class=" ml-auto">
+            <input type="submit" value="Logout" class="form-control btn-large btn-dark border-white ">
+        </form>
         </div>
     </nav>
-    <h2>Manage Users</h2>
-    <form action="/logout_process">
-       
-    </form>
-    <div class="table-responsive">
-        <table class="table table-striped table-sm">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>created-at</th>
-                    <th>user-level</th>
-
-                </tr>
-            </thead>
-            <tbody>
-
-                {% for user in users %}
+    <div class="card col-10 p-0 my-2">
+        <h2 class="card-header font_weight_light bg-dark text-light">Welcome, {{self.first_name}} <span class="small text-muted">--id:(({{self.id}}))</span> </h2>
+        <div class="card-body p-0">
+            <table class="table table-striped border m-0">
+                <thead class="bg-dark text-white">
                     <tr>
-                        <th>{{user.id}}</th>
-                        <th>{{user.first_name}} {{user.last_name}}</th>
-                        <th>{{user.email}}</th>
-                        <th>{{user.created_at}}</th>
-                        <th>placeholder</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>created-at</th>
+                        <th>user-level</th>
+
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+
+                    {% for user in users %}
+                        <tr class="">
+                            <td>{{user.id}}</td>
+                            <td>{{user.first_name}} {{user.last_name}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.created_at}}</td>
+                            <td>{{user.user_level}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>
