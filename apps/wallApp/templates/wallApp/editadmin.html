@@ -1,73 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Edit Profile</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="main.js"></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Edit Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="main.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark text-white">
-        <a class="navbar-brand" href="/">Dashboard</a>
-        <form action="/users/edit" class=" ml-auto">
-            <input type="submit" value="Edit profile" class="form-control btn-large btn-dark border-white ">
-        </form>
-        <form action="/logout_process" >
-            <input type="submit" value="Logout" class="form-control btn-large btn-dark border-white ">
-        </form>
-    </nav>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark text-white">
+    <a class="navbar-brand" href="/">Dashboard</a>
+    <form action="/users/edit" class=" ml-auto">
+      <input type="submit" value="Edit profile" class="form-control btn-large btn-dark border-white ">
+    </form>
+    <form action="/logout_process" >
+      <input type="submit" value="Logout" class="form-control btn-large btn-dark border-white ">
+    </form>
+  </nav>
     
-    <div class="row">
-        <div class="card mainwrapper col-7 my-3 px-0 bg-dark text-light" >
-            <div class ="h3 card-header mb-3 font-weight-normal border-white">Edit User #{{user.id}}</div>
-            <div class="row">
-                <div class="editInfo col-6">
-                    <form action="/edit_process/{{user.id}}" method="post" class="form-signin col-12 mx-auto py-3">
-                        {% csrf_token %}
-                        <h1 class ="h4 mb-3 font-weight-normal">Edit information</h1>
-                        <label for="inputEmail" >Email address:</label>
-                        <input type="email" name="email" class="form-control" >
-                        <label for="usr_first">First Name:</label>
-                        <input type="text" class="form-control" name="first_name">
-                        <label for="usr_last">Last Name:</label>
-                        <input type="text" class="form-control" name="last_name">
-                        <label for="userlevel">User level:</label>
-                        <select class="form-control" name="user_level">
-                            <option value="1">Normal</option>
-                            <option value="9">Bossman</option>
-                        </select>
-
-                        <button class="btn btn-outline-success ml-auto d-flex" type="submit">Save</button>
-
-                    </form>
-                </div>
-                <div class=" changepassword col-5 d-flex ml-auto" >
-                    
-                    <form action="/edit_process/{{user.id}}" method='post' class = "form-signin col-12 mx-auto">
-                        {% csrf_token%}
-                        <h1 class ="h3 mb-3 font-weight-normal">Change Password</h1>
-                        <label for="inputPassword">Password</label>
-                        <input type="password" name="pasword" class="form-control" >
-                        <label for="confirmPassword">Password Confirmation</label>
-                        <input type="password" name="confirm" class="form-control" >
-                        <button class="btn btn-outline-success ml-auto d-flex" type="submit">Update Password</button>
-                    </form>
-                </div>
-
-            </div><!--end row-->
-        </div><!--end mainwrapper-->
-
-        <div class="card col-4">
-            {% if messages %}
-            {% for message in messages %}
-            <li class="text-danger">{{message}}</li>
-            {% endfor %}
-            {% endif %}
+  <div class="row">
+    <div class="card mainwrapper col-7 my-1 px-0 bg-dark text-light" >
+      <div class ="h3 card-header font-weight-normal border-white">Edit User #{{user.id}}</div>
+      <div class="row card-body bg-light text-dark">
+        <div class="editInfo col-6">
+          <form action="/edit_process/{{user.id}}" method="post" class="form-signin col-12 mx-auto py-3">
+            {% csrf_token %}
+            <h4 class =" mb-3 font-weight-normal">Edit information</h4>
+            <label for="inputEmail" >Email address:</label>
+            <input type="email" name="email" class="form-control" >
+            <label for="usr_first">First Name:</label>
+            <input type="text" class="form-control" name="first_name">
+            <label for="usr_last">Last Name:</label>
+            <input type="text" class="form-control" name="last_name">
+            <label for="userlevel">User level:</label>
+            <select class="form-control" name="user_level">
+              <option value="1">Normal</option>
+              <option value="9">Bossman</option>
+            </select>
+            <button class="btn btn-dark mt-1 ml-auto d-flex" type="submit">Update info</button>
+          </form>
         </div>
-        
+        <div class=" changepassword col-5 d-flex ml-auto my-3" >  
+          <form action="/edit_process/{{user.id}}" method='post' class="form-signin col-12 mx-auto">
+            {% csrf_token%}
+            <h4 class =" mb-3 font-weight-normal">Change Password</h4>
+            <label for="inputPassword">Password:</label>
+            <input type="password" name="pasword" class="form-control" >
+            <label for="confirmPassword">Password Confirmation:</label>
+            <input type="password" name="confirm" class="form-control" >
+            <button class="btn btn-dark mt-1 ml-auto d-flex" type="submit">Update password</button>
+          </form>
+        </div>
+      </div><!--end row-->
+    </div><!--end mainwrapper-->
+
+    <div class="card col-4">
+        {% if messages %}
+        {% for message in messages %}
+        <li class="text-danger">{{message}}</li>
+        {% endfor %}
+        {% endif %}
     </div>
+  </div>
 
 </body>
 </html>

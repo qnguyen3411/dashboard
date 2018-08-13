@@ -9,13 +9,13 @@ class UserManager(models.Manager):
     def info_validation(self, 
                         postData, 
                         check_all=False, 
-                        check_name=False,
-                        check_email=False,
-                        check_password=False,
-                        check_birthday=False):
+                        name_only=False,
+                        email_only=False,
+                        password_only=False,
+                        birthday_only=False):
         errors = {}
         try:
-            if check_name or check_all:
+            if name_only or check_all:
                 if len(postData['first_name']) < 2 :
                     errors['first_name_length'] = "First name must be 2 characters or more"
                 elif not postData['first_name'].isalpha():
@@ -26,7 +26,7 @@ class UserManager(models.Manager):
                 elif not postData['last_name'].isalpha():
                     errors['last_name_noalpha'] = "Last name must consist of only characters"
             
-            if check_email or check_all:
+            if email_only or check_all:
                 #If empty/invalid format
                 if len(postData['email']) < 1 :
                     errors['email_length'] = "Email must not be empty"
@@ -38,13 +38,13 @@ class UserManager(models.Manager):
                     if len(match):
                         errors['email_match'] = "Email is already in database"
             
-            if check_password or check_all:
+            if password_only or check_all:
                 if len(postData['password']) < 8:
                     errors['password_short'] = "Password must be at least 8 characters"
                 elif postData['password'] != postData['confirm']:
                     errors['confirm_wrong'] = "Password must match password confirm"
             
-            if check_birthday or check_all:
+            if birthday_only or check_all:
                 try:
                     birthday = datetime.date(
                         month=int(postData['month']),

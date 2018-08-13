@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Admin add Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="main.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark text-white">
+    <a class="navbar-brand" href="/">Dashboard</a>
+    <a class="btn btn-dark border-white ml-auto" href="/login">Sign in</a>
+    <a class="btn btn-dark border-white" href="/register">Register</a>
+  </nav>
+  <div class="row">
+    <form action="/register_process" method='post' class = "form-signin col-5 mt-3 ml-2">
+      {% csrf_token %}
+      <h1 class ="h3 mb-3 font-weight-normal">Add user</h1>
+      {% if messages %}
+      {% for message in messages %}
+      <li class="text-danger mb-1">{{message}}</li>
+      {% endfor %}
+      {% endif %}
+      <label for="email" >Email address:</label>
+      <input type="email" name="email" class="form-control" >
+      <label for="first_name">First Name:</label>
+      <input type="text" class="form-control" name="first_name">
+      <label for="last_name">Last Name:</label>
+      <input type="text" class="form-control" name="last_name">
+      <label for="birthday">Birthday:</label>
+      <div class=" ml-1 row h3 font-weight-light text-secondary">
+      <input type="text" placeholder="mm" class="col-2 form-control" name="month"> /
+      <input type="text" placeholder="dd" class="col-2 ml-2 form-control" name="day"> /
+      <input type="text" placeholder="yyyy" class="col-2 ml-2 form-control" name="year">
+      </div>
+      <label for="password">Password</label>
+      <input type="password" name="password" class="form-control">
+      <label for="confirm">Password Confirmation</label>
+      <input type="password" name="confirm" class="form-control" >
+      <input class=" bg-dark text-white form-control col-3 my-2" type="submit" value="Register">
+      <a href="/admin">Go back to dashboard.</a>
+    </form>
+  </div>
+</body>
+</html>

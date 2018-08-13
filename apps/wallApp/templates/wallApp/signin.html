@@ -1,41 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Signin Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="main.js"></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Signin Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="main.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark text-white">
-        <a class="navbar-brand" href="/">Dashboard</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        
-    </nav>
-    <div class="row ml-1">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark text-white">
+    <a class="navbar-brand" href="/">Dashboard</a>
+    <a class="btn btn-dark border-white ml-auto" href="/login">Sign in</a>
+    <a class="btn btn-dark border-white" href="/register">Register</a>
+  </nav>
+  <div class="row ml-1">
     <form action="/login_process" method='post' class = "form-signin col-5 mt-3">
-        {% csrf_token %}
-
-        <h1 class ="h3 mb-3 font-weight-normal">Signin</h1>
-        {% if messages %}
-        {% for message in messages %}
-        <li class="text-danger">{{message}}</li>
-        {% endfor %}
-        {% endif %}
-        <label for="email" class="" >Email address:</label>
-        <input type="email" name="email" class="form-control" placeholder="Email">
-        <label for="password" class="mt-1">Password:</label>
-        <input type="password" name="password" class="form-control" placeholder="Password">
-        <input class=" bg-dark text-white form-control col-3 my-2" type="submit" value="Sign In">
-        <a href="/register">Don't have an account? Register.</a>
+      {% csrf_token %}
+      <h1 class ="h3 mb-3 font-weight-normal">Signin</h1>
+      {% if messages %}
+      {% for message in messages %}
+      <li class="text-danger">{{message}}</li>
+      {% endfor %}
+      {% endif %}
+      <label for="email" class="" >Email address:</label>
+      <input type="email" name="email" class="form-control" placeholder="Email">
+      <label for="password" class="mt-1">Password:</label>
+      <input type="password" name="password" class="form-control" placeholder="Password">
+      <input class=" bg-dark text-white form-control col-3 my-2" type="submit" value="Sign In">
+      <a href="/register">Don't have an account? Register.</a>
     </form>
-
-
-    </div>
+  </div>
 </body>
 </html>
