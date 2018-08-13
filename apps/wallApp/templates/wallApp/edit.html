@@ -27,11 +27,11 @@
             {% csrf_token %}
             <h4 class ="mb-3 font-weight-normal">Edit information</h4>
             <label for="inputEmail" >Email address:</label>
-            <input type="email" name="email" class="form-control" >
+            <input type="email" name="email" class="form-control" value="{{user.email}}">
             <label for="usr_first">First Name:</label>
-            <input type="text" class="form-control" name="first_name">
+            <input type="text" class="form-control" name="first_name" value="{{user.first_name}}">
             <label for="usr_last">Last Name:</label>
-            <input type="text" class="form-control" name="last_name">
+            <input type="text" class="form-control" name="last_name" value="{{user.last_name}}">
             <button class="btn btn-dark mt-1 ml-auto d-flex" type="submit">Update info</button>
           </form>
         </div>

@@ -189,7 +189,7 @@ def edit_process(request,id):
                     
                     errors = User.objects.info_validation(
                         request.POST, name_only=True, email_only=True)
-                    #If matching emails, check if the input is just the target's old email
+                    #If matching emails, ignore case where user enter their old email
                     if 'email_match' in errors and request.POST['email'] == targets[0].email:
                         errors.pop('email_match')
                     if len(errors):
@@ -216,11 +216,17 @@ def edit_process(request,id):
                 return redirect('/admin/edit/' + id)
     return redirect('/')
     
-def add_process(request):
-    pass
 
 def remove_process(request,id):
-    pass
+    # 
+    if 'id' in request.session:
+        # If target's ID is valid
+        targets = User.objects.filter(id=id)
+        users = User.objects.filter(id=request.session['id'])
+        if len(users) and len(targets):
+            if users[0].user_level == 9:
+                targets[0].delete()
+    return redirect ('/')
 
 def logout_process(request):
     if 'id' in request.session:
