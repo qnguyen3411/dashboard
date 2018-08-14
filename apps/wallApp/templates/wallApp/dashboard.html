@@ -12,7 +12,7 @@
   <script>
     $( document ).ready(function() {
       $('.icon-text').hide()
-
+      $('#message-box').hide()
       $('.nav-link').click(function(){
         $('.nav-link, .tab-pane').removeClass("active");
         $('.nav-link').addClass("bg-dark border-white text-white")
@@ -29,8 +29,24 @@
         },function(){
           $(this.getElementsByClassName('icon-text')[0]).hide()
         }
-      );//end hover
+      );//end hover 
+      $('.message-link').click(function(){
+        name = this.getAttribute('username');
+        id = this.getAttribute('userid');
+        message_box = document.getElementById('message-box');
+        document.getElementById('message-header').innerHTML = "Compose message for "+ name;
+        message_box.setAttribute('action', "/message_process/"+id);
+
+        if (name == message_box.getAttribute('messagefor')){
+          $(message_box).fadeToggle();
+        }else{
+           $(message_box).fadeIn()
+        }
+        message_box.setAttribute('messagefor', name);  
+      })
     });//end document ready
+
+     
   </script>
 
 </head>
@@ -84,17 +100,16 @@
                   </div>
                   <!-- end info panel -->
                   <div class="col-3 d-flex text-dark mt-auto ml-auto p-0 justify-content-end">
-                    <a href="" class="text-info icon-link pt-5 px-1">
+                    <a href="/new_request/{{user.id}}" class="text-info icon-link pt-5 px-1">
                     <i class="fas fa-user-friends friend-icon lead"></i>
                       <span class="small font-weight-bold icon-text"> Add friend </span>
                     </a>
 
-                    <a href="" class="text-info icon-link pt-5 px-1">
+                    <a href="#" username="{{user.first_name}}" userid="{{user.id}}" class="text-info icon-link message-link pt-5 px-1">
                     <i class="far fa-comment ml-2 message-icon lead"></i>
                     <span class="small font-weight-bold icon-text"> Message </span>
                     </a>
                   </div>
-                  <!-- end button panel -->
                 </div>
               </li>
               {% endfor %}
@@ -109,26 +124,42 @@
     </div>
 
     <div class="col-3 card h-25 p-0 mt-1">
-      
-      <div class="card-header bg-dark text-light">
-        <h4>{{self.first_name}} {{self.last_name}}</h4>
-        <ul class="mb-0">
-          <li class="m-0"><span class="font-weight-bold">ID</span>: {{self.id}}</li>
-          <li class="m-0"><span class="font-weight-bold">Email</span>: {{self.email}}</li>
-          <li class="m-0"><span class="font-weight-bold">User level</span>: {{self.user_level}}</li>
+      <ul class="list-group bg-dark">
+        <a href="/users/{{self.id}}" class="list-group-item bg-dark list-group-item-action text-light">Your page</a>
+        <a href="users/edit" class="list-group-item list-group-item-action bg-dark text-light">Edit info</a>
+        <a class="list-group-item list-group-item-action bg-dark text-light ">Notifications</a>
+        <div class="bg-dark" style="overflow: scroll; min-height:0px; max-height:175px; ">
+        <ul class="list-group">
+          <!-- <li class="list-group-item p-1 small">Friend request from Dingus
+            <p class="mb-2"><a class="badge badge-success" href="">Accept</a> <a class="badge badge-danger" href="">Decline</a></p>
+          </li>
+          <li class="list-group-item p-1 small">Friend request from Diangos
+            <p class="mb-2"><a class="badge badge-success" href="">Accept</a> <a class="badge badge-danger" href="">Decline</a></p>
+          </li>
+          <li class="list-group-item p-1 small">Friend request from Diangos
+            <p class="mb-2"><a class="badge badge-success" href="">Accept</a> <a class="badge badge-danger" href="">Decline</a></p>
+          </li> -->
+          {% for request in self.received_friend_requests.all %}
+          <li class="list-group-item p-1 small">Friend request from {{request.sender.first_name}}
+            <p class="mb-2">
+            <a class="badge badge-success" href="/respond_request/{{request.id}}/1">Accept</a> 
+            <a class="badge badge-danger" href="/respond_request/{{request.id}}/0">Decline</a></p>
+          </li>
+          {% endfor %}
         </ul>
-      </div>
-      
-      <ul class="list-group">
-        <a href="/users/{{self.id}}" class="list-group-item list-group-item-action">Your page</a>
-        <li class="list-group-item">Notifications</li>
-        
-        <li class="list-group-item">Settings</li>
-          <ul>
-            <li class="list-group-item py-1">Edit profile</li>
-            <li class="list-group-item py-1">Log out</li>
-          </ul>
+        </div>
       </ul>
+      {% if messages %}
+      {% for message in messages %}
+      <li class="text-danger">{{message}}</li>
+      {% endfor %}
+      {% endif %}
+      <form action="" messagefor="" id="message-box" method='post' class="card mt-2">
+        {% csrf_token %}
+        <h6 id="message-header" class="card-header bg-dark text-white">:</h6>
+        <textarea name="content" class=" form-control" rows="5" placeholder="Your text here"></textarea>
+        <input type="submit" class="form-control btn btn-dark col-12 ">
+      </form>
     </div>
   </div>
 </body>

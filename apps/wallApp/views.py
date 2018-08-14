@@ -1,6 +1,7 @@
 import datetime
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
+from django.db.models import Q
 import bcrypt
 from .models import *
 
@@ -227,6 +228,40 @@ def remove_process(request,id):
             if users[0].user_level == 9:
                 targets[0].delete()
     return redirect ('/')
+
+def new_friend_request(request, id):
+    if 'id' in request.session:
+    # If target's ID is valid
+        receivers = User.objects.filter(id=id)
+        senders = User.objects.filter(id=request.session['id'])
+        # If both sender and receiver id are correct
+        if len(senders) and len(receivers):
+            # If user not sending to himself
+            if senders[0].id != receivers[0].id:
+                requests = FriendRequest.objects.filter(
+                    Q(sender__id=senders[0].id, receiver__id=receivers[0].id)
+                    | Q(sender__id=receivers[0].id, receiver__id=senders[0].id))
+                if not len(requests):
+                    FriendRequest.objects.create(sender=senders[0], receiver=receivers[0])
+                    messages.success(request,"Friend request sent!")
+                    return redirect('/')
+    messages.error(request, "Unable to send friend request.")
+    return redirect ('/')
+
+def respond_friend_request(request, req_id, response):
+    if 'id' in request.session:
+    # If target's ID is valid
+        requests = FriendRequest.objects.filter(id=req_id)
+        users = User.objects.filter(id=request.session['id'])
+
+        if len(requests) and len(users):
+            if requests[0].receiver.id == request.session['id']:
+                if response == '0' :
+                    print("ReQUEST DECLINED")
+                else :
+                    print("ReQUEST ACCEPTED")
+                requests[0].delete()
+    return redirect('/')
 
 def logout_process(request):
     if 'id' in request.session:

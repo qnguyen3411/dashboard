@@ -22,5 +22,7 @@ urlpatterns = [
     url(r'^edit_process/(?P<id>\d+)$', views.edit_process),
     url(r'^add_process$', views.remove_process),
     url(r'^remove_process/(?P<id>\d+)$', views.remove_process),
+    url(r'^new_request/(?P<id>\d+)$', views.new_friend_request),
+    url(r'^respond_request/(?P<req_id>\d+)/(?P<response>[01])$', views.respond_friend_request),
     
 ]

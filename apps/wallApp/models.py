@@ -87,3 +87,8 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class FriendRequest(models.Model):
+    sender = models.ForeignKey(User, related_name="sent_friend_requests")
+    receiver = models.ForeignKey(User, related_name="received_friend_requests")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
